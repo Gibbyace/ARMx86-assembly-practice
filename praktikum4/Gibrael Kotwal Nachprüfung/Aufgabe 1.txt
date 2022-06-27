@@ -33,3 +33,7 @@ strb r1,[r0(0x2),r1(#4)]! 	// lade wert 0x4 von r1 in adresse (0x2 + 0x4) 0x6
 
 
 
+! bedeutet writeback von Basisregister
+
+Basisregister = register welches den adressen Wert gibt/nimmt
+Basisregister behält sonst gleichen Wert, wenn kein ! 
