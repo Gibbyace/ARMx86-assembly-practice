@@ -1,0 +1,44 @@
+
+
+.file "aufgabe3"
+.text 				// textsection fuer programmCode + Konstanten an 
+.align 2 			// nachfolgende Anweisungen auf einer durch 4 teilbaren Adresse liegen // warum muss man 2 angeben? 2^2? 
+				// untere 2 bis ind 0;  // why?
+
+.global main 			// nimmt das Symbol main in die globale Symboltabelle auf
+
+
+.main 
+	push (lr)		// rücksprungadresse und evtl weitere Register sichern 
+	
+	bl(kopieren)
+
+	bl(reduzieren)
+
+	bl (sortieren
+
+	pop{pc}			//
+
+
+
+
+
+adr_StringA: .word StringA	//hilfsvariable um an Adressen aus anderen Segmenten zu kommen
+
+adr_StringB: .word StringB
+
+.lfe1:				// was macht das?
+
+	.size	main,.Lfe1-main	//programmgroesse berechnen
+
+//.data-Section fuer intialisierte Daten
+	.data
+//liste von Zeichen
+
+StringA: 	.asciz "Dies ist eine Email-Adresse: Max_Mustermann@h-da.de !"
+
+//.comm-Section fuer nicht initialisierte Daten
+ 	.comm StringB, 256 	// Speicherbereich fuer zu sortierende StringB
+	.comm StringC, 256	// Speicherbereich fuer zu sortierende StringC
+
+//EOF

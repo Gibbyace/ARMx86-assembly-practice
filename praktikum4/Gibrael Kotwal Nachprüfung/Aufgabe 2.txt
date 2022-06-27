@@ -1,0 +1,17 @@
+
+a)
+
+Das anhängen von einem S an eine arithmetische Operation setzt die condtionflags (NZCV)
+
+Add setzt keine, Adds setzt conditions 
+
+logische operationen wie vergleiche (cmp) 
+oder Addseq, cmpne, 
+
+
+b)
+
+
+ADR: Lade adresse in einer bestimmten range ohne einen data load;
+
+ 
