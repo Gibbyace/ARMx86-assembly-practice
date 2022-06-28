@@ -10,7 +10,7 @@
 	.type main,function
 main:
 	push {lr} @ Ruecksprungadresse und Register sichern
-	ldr 	R0, Adr_StringA
+	ldr 	R0, Adr_StringA				//lade r0 mit adresse von StringA
 @	..
 	bl	kopieren
 @	..
@@ -21,46 +21,57 @@ main:
 	
 kopieren:
 @ hier Ihr Programm zum Kopieren eines String
-	ldr	R1, = StringB
-	mov	r2, r1
+	ldr	R1, = StringB				// lade r1 mit adresse von stringB	initialisierung von stringB	
+	mov	r2, r1					// kopiere r1 in r2 //in r1 ist anfang von string, kein laden
 loop_kopieren:	
 @	..
 	
-	LDRB	r3, [r0], #1
-	STRB	r3, [r2], #1
-	cmp 	r3, #0
-	bne 	loop_kopieren
-	bx lr
+	LDRB	r3, [r0], #1				// lade adresseninhalt von r0 in r3 und speichere die adresse von 1 byte weiter in r0
+	STRB	r3, [r2], #1				// speichere wert von r3 auf adresse in r2 und speichere adresse von 1 byte weiter in r2
+	cmp 	r3, #0					// vergleiche wenn inhalt von r3 = 0 (endcondition), sonst skip 
+	bne 	loop_kopieren				// wenn char / wert ungleich 0 (endcondition), dann kopiere weiter
+	bx lr						// jump in nächstes unterprogramm reduzieren, wenn vorherige conditon nicht ausgeführt wird
 
 
 reduzieren:
 @ hier Ihr Programm um alle Buchstaben (a..z; A..Z) zu entfernen
 @	..	
-	mov	r0, r1
-	mov	r5, #0x41
-	mov	r6, #0x5B
-	b	inner_loop
+	mov	r0, r1					// kopiere inhalt von r1 in r0 (kopierte Stringb in r0)
+	mov	r5, #0x41				// kopiere asci wert von A (dez 64)
+	mov	r6, #0x5B				// kopiere asci wert von [ (dez 91)
+	b	inner_loop				// sprung zur inneren loop 
+
 loop_reduzieren:			@nimmt den nächsten zu überprüfenden character
-	LDRB	r2, [r0, #1]!
+	LDRB	r2, [r0, #1]!				// lade byteweise inhalt von r0 + 1byte weiter in r2 und schreibe 1 byte weitere adresse in r0
 	
-	CMP	r2, #0
-	BEQ	gros_klein
+	CMP	r2, #0					// vergleiche ob r2 = 0, end 
+
+	BEQ	gros_klein				// wenn gleich, springe zu gros_klein
+
 inner_loop:				@findet den nächsten zu entfernenden buchstaben (erst alle großen, dann alle kleinen)
-	LDRB	r2, [r0]
-	CMP	r2, r5
-	BLT	loop_reduzieren
-	CMP	r2, r6
-	BGE	loop_reduzieren
-	mov	r4, r0
+
+	LDRB	r2, [r0]				// lade inhalt an adresse in r0 in r2 
+	CMP	r2, r5					// vergleiche ob r2 = Acii A
+	BLT	loop_reduzieren				// sonst branch with link to loop_reduzieren
+	
+	CMP	r2, r6					// <= ascii [ 
+
+	BGE	loop_reduzieren				// if greater equal loop_reduzieren
+
+	mov	r4, r0					// geht zurück zu anfang zu stringB (String B ist eine liste an adressen)
+
 aufruecken:				@entfernt den gefundenen buchstaben
-	LDRB	r3, [r4, #1]
-	STRB	r3, [r4], #1
-	CMP	r3, #0
-	BNE	aufruecken
-	b	reduzieren
+
+	LDRB	r3, [r4, #1]				// lade aus adresse in r4+1 byte weiter in r3
+	STRB	r3, [r4], #1				// speichere wert von r3 in adresse in r4 und gehe einen byte weiter in memory und speichere das in r4
+	CMP	r3, #0					// vergleiche ob null (endconditon)
+	BNE	aufruecken				// wenn gleich, starte unterprogramm aufrücken
+	b	reduzieren				// sonst reduzieren
+
 gros_klein:				@wechselt von groß- zu kleinbuchstaben
-	CMP	r5, #0x41
-	MOVEQ	r5, #0x61
+					// noch eine loop zum vergleichen von kleinen buchstaben
+	CMP	r5, #0x41		// Ist gleich A?			 
+	MOVEQ	r5, #0x61		// ist  
 	MOVEQ	r6, #0x7B
 	MOVEQ	r0, r1
 	BEQ	inner_loop
@@ -76,7 +87,7 @@ finde_ende:
 	CMP	r2, #0
 	BNE	finde_ende
 	
-	LDRB	r2, [r0, #-2]!		@r2 ist das ende vom string
+	LDRB	r2, [r0, #-2]!		@r2 ist das ende vom string // -2 weil wir schauen und immer das nächste an, nach Null kommt nochmal null also muss man 2 zurück
 	MOV	r3, r0			@adresse von ende in r3
 	
 	
@@ -106,7 +117,7 @@ Adr_StringA:	.word StringA 	@ auf dieser Speicherstelle liegt die Adresse,
 	.data
 StringA: .asciz "Dies ist eine EMAil-Adresse: Max_Mustermann@h-da.de !"
 
-// .comm-Section fuer nicht initialisierte Daten
+// .comm-Section fuer nicht initialisierte Daten !!! Deswegen (=) zugreifen! alternative ist referenz auf die adresse // register wo adresse von speicher drinne ist
 	.comm StringB, 256 	@ Speicherbereich mit der max. Groesse eines StringA reservieren
 
 // End of File

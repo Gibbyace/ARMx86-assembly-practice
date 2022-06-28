@@ -1,6 +1,6 @@
-mov r0, #0 		// copiere den wert null in das register 0;
+mov r0, #0 		// kopiere den wert null in das register 0;
 
-str r1,[r0#4] 		// lade den Wert in R1 in memory 0x4;
+str r1,[r0,#4] 		// lade den Wert in R1 in memory 0x4;
 			// nichts weiteres passiert mit r0 
 
 ______________________________________________________
@@ -11,7 +11,7 @@ str r1,[r0],#4		// lade den inhalt von r1 in adresse 0x0
 			// lade die adresse von 0x4 in R0
 _____________________________________________________
 
-mov r0,#0 		// copiere den Wert 0 in register 0
+mov r0,#0 		// kopiere den Wert 0 in register 0
 
 str r1,[r0]!	 	// lade wert von r1 in adresse 0x0 
 			// lade wert von 0x0 in r0
@@ -26,7 +26,7 @@ str r1,[r0,#4]! 	// lade inhalt von r1 in adresse 0x4
 strb r1 ,[r0,#2]! 	// lade wert von r1 in adresse 0x2 
 (store byte)		// lade die adresse 0x2 (ein byte weiter) in r0;
 
-mov r1,#4		// copiere 0x4 in r1
+mov r1,#4		// kopiere 0x4 in r1
 
 strb r1,[r0(0x2),r1(#4)]! 	// lade wert 0x4 von r1 in adresse (0x2 + 0x4) 0x6   
 			// lade adresse 0x6 in r0; 
@@ -35,5 +35,5 @@ strb r1,[r0(0x2),r1(#4)]! 	// lade wert 0x4 von r1 in adresse (0x2 + 0x4) 0x6
 
 ! bedeutet writeback von Basisregister
 
-Basisregister = register welches den adressen Wert gibt/nimmt
+Basisregister = register welches den adressen Wert gibt
 Basisregister behält sonst gleichen Wert, wenn kein ! 
