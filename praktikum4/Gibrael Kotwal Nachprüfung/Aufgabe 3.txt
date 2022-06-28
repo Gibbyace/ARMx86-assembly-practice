@@ -49,10 +49,18 @@ reduzieren:
 	
 	b loop_reduzieren_1 		// sprung zu loop 1
 
-loop_reduzieren_1:
+loop_reduzieren_1:		// prüft den jeweils nächsten character 
 
 	ldrb r2, [r0,#1]!	// lade inhalt an adresse von r0 in r2 , inkrementiere memory um 1 byte und speichere diese adresse in r0
 	
+	cmp r2, #0		//vergleiche ob r2 = 0; end condtion 
+
+	beq loop_reduzieren_2	// wenn gleich, springe zu groß_klein 
+
+loop_reduzieren_2: 		// finde den zu entfernenden buchstaben 
+
+	ldrb 	r2, [r0] 	// lade inhalt an adresse in r0 in r2
+		
 	
 
 

@@ -70,22 +70,22 @@ aufruecken:				@entfernt den gefundenen buchstaben
 
 gros_klein:				@wechselt von groß- zu kleinbuchstaben
 					// noch eine loop zum vergleichen von kleinen buchstaben
-	CMP	r5, #0x41		// Ist gleich A?			 
-	MOVEQ	r5, #0x61		// ist  
-	MOVEQ	r6, #0x7B
-	MOVEQ	r0, r1
-	BEQ	inner_loop
-	bx	lr	
+
+	CMP	r5, #0x41		// Ist gleich !?		 
+	MOVEQ	r5, #0x61		// ist gleich a? lade in r5
+	MOVEQ	r6, #0x7B		// ist gleich [? lade in r6
+	MOVEQ	r0, r1			// lade zeichen in r0; lade in r0
+	BEQ	inner_loop		// Wenn gleich, inner loop
+	bx	lr			// rücksprung wenn fertig mit loop 
 	
 sortieren:
 @ hier Ihr Programm zum sortieren 
-@	..
-	mov	r5, r1
-	mov	r0, r5
+@	..			
+	mov	r0, r1			//lade erstes zeichen in r0;
 finde_ende:
-	LDRB	r2, [r0], #1	
-	CMP	r2, #0
-	BNE	finde_ende
+	LDRB	r2, [r0], #1		//}
+	CMP	r2, #0			//}
+	BNE	finde_ende		// gehe durch liste bis ende gefunden wurde
 	
 	LDRB	r2, [r0, #-2]!		@r2 ist das ende vom string // -2 weil wir schauen und immer das nächste an, nach Null kommt nochmal null also muss man 2 zurück
 	MOV	r3, r0			@adresse von ende in r3

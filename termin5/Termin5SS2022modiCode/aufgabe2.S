@@ -9,23 +9,25 @@
 	.global	main		@ nimmt das Symbol main in die globale Sysmboltabelle auf
 	.type	main,function
 main:
-	push	{lr}
+	push	{lr}		//super wichtig, return von unterprogramm muss auf stack nachdem es ausgeführt wurde 
 
 	bl	up1
 	bl	up2
 	bl	up3
 	
-	pop		{pc}
+	pop		{pc}	//fetcht die return adresse vom stack und packt es in PC
+				//kontrolle zurück an "mainroutine"
 
 // UP1 benutzt nur Scratchregister und stellt keine Blattroutine dar (ruft somit weitere
 // Unterprogramme auf)	
-up1:
+up1:				// wie eine subroutine in c++ ohne return value, Gibraels vergleich
 	push	{r4, r5, r6, lr}
 	mov	r4, #1
 	mov	r5, #5
 	sub	r6, r5, r4
 	bl	up2
-	pop	{r4, r5, r6, pc}
+	pop	{r4, r5, r6, pc}//pop link register von stack und pack es in pc (wie lr aber mit jump) (wie return 
+				// ähnlich wie return 0 in c++; 
 
 // UP2 benutzt nur Scratchregister und stellt eine Blattroutine dar (ruft somit keine weiteren
 // Unterprogramme auf)
