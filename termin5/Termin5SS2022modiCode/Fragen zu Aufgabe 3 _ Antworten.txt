@@ -23,9 +23,9 @@ also können maximal 1024 wörter in die Werteliste gegeben werden
 Table of defined values MAX is 1024
 
 
-Frage 2:
+Frage 2: 
 
-Der PC kann nicht auf weitere adressen zugreifen und somit crasht das programm 
+Intruktions corruption 
 
-"Griff ins nichts"
+Der offset wird immer größer und verschlingt die restlichen freien bits, wie z.b. statusregisterbits
 
