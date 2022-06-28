@@ -10,17 +10,50 @@
 
 .main 
 	push (lr)		// rücksprungadresse und evtl weitere Register sichern 
-	
+		
+	ldr r0, adr_StringA	// lade adresse stringA in register r0
+
 	bl(kopieren)
-
+@	..
 	bl(reduzieren)
-
+@	..	
 	bl (sortieren
-
+@	..
 	pop{pc}			//
 
+kopieren:
+@lade string in register 
 
+	ldr r1 = StringB 	// lade adresse stringB in r1
+	mov r2, r1		// kopiere r1 in r2
+	
+kopier_loop:
+	
+	ldrb r3,[r0], #1 	// lade byte in r3 von adresse in r0 
+				// lade adresse von 1byte weiter in r0
+	strb r3,[r2], #1 	// speichere r3 in adresse von r2 
+				// speichere 1 byte weiter in r2
+	
+	cmp r3, #0 		// vergleiche inhalt von 3 mit 0 
+	
+	bne kopier_loop		// kopiere das nächste zeichen wenn cmp nicht gleich ist und springe wieder zurück in die loop 
+	
+	bc lr 			// rücksprung zu adresse in Link Register
 
+reduzieren:
+@entfernt alle buchstaben, groß oder klein 
+
+	mov r0,r1 		// kopiere r1 in r0
+	mov r5, #0x41		// kopiert asci wert 41 in r5
+	mov r6, #0x58 		// kopiert asci wert 58 in r6
+	
+	b loop_reduzieren_1 		// sprung zu loop 1
+
+loop_reduzieren_1:
+
+	ldrb r2, [r0,#1]!	// lade inhalt an adresse von r0 in r2 , inkrementiere memory um 1 byte und speichere diese adresse in r0
+	
+	
 
 
 adr_StringA: .word StringA	//hilfsvariable um an Adressen aus anderen Segmenten zu kommen

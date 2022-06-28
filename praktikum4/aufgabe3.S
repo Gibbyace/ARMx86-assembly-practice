@@ -21,7 +21,7 @@ main:
 	
 kopieren:
 @ hier Ihr Programm zum Kopieren eines String
-	ldr	R1, =StringB
+	ldr	R1, = StringB
 	mov	r2, r1
 loop_kopieren:	
 @	..
