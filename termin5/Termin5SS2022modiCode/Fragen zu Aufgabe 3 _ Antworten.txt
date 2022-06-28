@@ -1,0 +1,31 @@
+Aufgabe 3:
+
+
+Frage 1:
+Warum funktioniert das Programm im Simulator?
+
+// gute frage
+
+
+Wie groß darf die Werteliste maximal werden?
+
+Der opcode besteht aus ingesamt 32 bits 
+12 bits davon sind reserviert für den offset 
+
+also können maximal 2^12 bits verwendet werden 
+
+1 wort ist 4 bit lang 
+
+4096 / 4 = 1024
+
+also können maximal 1024 wörter in die Werteliste gegeben werden 
+
+Table of defined values MAX is 1024
+
+
+Frage 2:
+
+Der PC kann nicht auf weitere adressen zugreifen und somit crasht das programm 
+
+"Griff ins nichts"
+
