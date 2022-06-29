@@ -1,13 +1,13 @@
-mov r0, #0 		// kopiere den wert null in das register 0;
+mov r0, #0 		// kopiere den wert null in das register 0; //immediate wert max 12 bit
 
-str r1,[r0,#4] 		// lade den Wert in R1 in memory 0x4;
+str r1,[r0,#4] 		// lade den Wert in R1 in memory 0x4;	    //indizierte adressirung  	
 			// nichts weiteres passiert mit r0 
 
 ______________________________________________________
 
 eor r0,r0,r0 		// xor mit 0 und 0 in r0 = 0 
 
-str r1,[r0],#4		// lade den inhalt von r1 in adresse 0x0 
+str r1,[r0],#4		// lade den inhalt von r1 in adresse 0x0  //
 			// lade die adresse von 0x4 in R0
 _____________________________________________________
 
@@ -29,8 +29,18 @@ strb r1 ,[r0,#2]! 	// lade wert von r1 in adresse 0x2
 mov r1,#4		// kopiere 0x4 in r1
 
 strb r1,[r0(0x2),r1(#4)]! 	// lade wert 0x4 von r1 in adresse (0x2 + 0x4) 0x6   
-			// lade adresse 0x6 in r0; 
+				// lade adresse 0x6 in r0; 
 
+mov r0,#2
+mov r1,#2;
+
+ldr r3, [r0,r1,LSL #2] 		//basisregister (0x2) + (0x2*4 (2^2)) 
+				// speichere wert in adresse 0xA an r3
+
+
+
+indirekte adressierung ist besser als direkte, da die adresse zu laufzeit verändert werden kann
+RISC prozesoren könne das eh nicht 
 
 
 ! bedeutet writeback von Basisregister

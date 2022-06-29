@@ -1,0 +1,8 @@
+Little Endian 
+Aufsteigende bytereihe
+
+1byte 8 bit
+
+fuer 0xaabbccdd
+
+

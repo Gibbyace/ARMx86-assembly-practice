@@ -36,8 +36,10 @@ Ai: operation 1 ist in der fetchphase
     opertation2 ist in der decodephase
     operation 3 ist in der executephase
 
-das ist sofern machbar, wenn kein interupt kommt oder jump oder die operationen nicht um eine phase
+das ist sofern machbar, wenn kein interupt kommt oder jump oder die operationen nicht die gleiche phase ausführt
 
+BSP branch befehl wird ausgeführt:
+Pipeline muss unterbrochen werden und neue adresse in pc geladen werden 
 
 
  c)
