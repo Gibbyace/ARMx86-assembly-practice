@@ -94,7 +94,7 @@ finde_ende:
 sort_loop:
 	CMP	r5, r3			@vergleicht Anfang des Strings mit dem Ende des zu sortierenden Bereichs
 	BXEQ	lr			@wenn gleich -> fertig sortiert
-	MOV	r0, r5
+	MOV	r0, r5			
 sort_inner_loop:	
 	LDRB	r2, [r0]	
 	LDRB	r4, [r0, #1]

@@ -14,4 +14,34 @@ b)
 
 ADR: Lade adresse in einer bestimmten range ohne einen data load;
 
- 
+vergleichbarer code ist 
+
+Add r1, pc, #0 
+
+
+sollte die marke nicht in der range von ADR sein, dann kann man zugreifen durch einen 
+LDR R1, = marke 
+um so auf die adresse der marke zu kommen 
+
+Warum?
+In das register wird die adresse der marke abhängig von der aktuellen adresse des PC geschrieben 
+in diesem beispiel wird r1 mit dem pc + 0 gespiechert 
+da zum zeitpunkt diesen befehles der pc 2 befehle weiter ist, wegen dem 
+
+pipelining 
+
+in arm werden bis zu 3 operationen um 1 phase versetzt ausgeführt
+
+Ai: operation 1 ist in der fetchphase
+    opertation2 ist in der decodephase
+    operation 3 ist in der executephase
+
+das ist sofern machbar, wenn kein interupt kommt oder jump oder die operationen nicht um eine phase
+
+
+
+ c)
+
+Der befehl wird nur ausgeführt, wenn das zero-bit gesetzt wurde
+Aber in diesem BPS wird nur das Carry und Overflow gestzt, daher wird der befehl nicht ausgeführt
+CPSR und r1 werden nicht verändert 
