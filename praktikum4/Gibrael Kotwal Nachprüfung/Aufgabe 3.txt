@@ -19,7 +19,7 @@
 @	..	
 	bl (sortieren
 @	..
-	pop{pc}			//
+	pop{pc}			// lade aus dem stack den pc
 
 kopieren:
 @lade string in register 

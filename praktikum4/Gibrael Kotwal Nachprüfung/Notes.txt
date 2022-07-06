@@ -1,7 +1,9 @@
 Little Endian 
 Aufsteigende bytereihe
-
+654321
+von rechts nach links lesen 
 1byte 8 bit
+32bit fuer 4 byte
 
 fuer 0xaabbccdd
 
